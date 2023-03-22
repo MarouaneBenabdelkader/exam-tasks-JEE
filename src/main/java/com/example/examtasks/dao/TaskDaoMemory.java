@@ -56,7 +56,7 @@ public class TaskDaoMemory implements TaskDao{
             for (Task task : tasks) {
                 if(task.equals(task1)) {
                     task2.setId(task1.getId());
-                    task1.setId(task1.getId() + 1);
+                    task1.setId(task2.getId() + 1);
                     return true;
                 }
             }

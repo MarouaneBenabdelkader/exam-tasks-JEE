@@ -8,19 +8,18 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet("/update")
-public class UpdateTaskServlet extends HttpServlet {
+@WebServlet("/updatetop")
+public class UpdateTaskUpServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        String typofswap = "top";
+        Integer taskId = Integer.valueOf(request.getParameter("id"));
+        Task task2;
+        Task task1 = DefaultServices.getInstance().getById(taskId);
+            task2 = DefaultServices.getInstance().getById(taskId - 1);
+        System.out.println(task1 +"ssssssssssssss1" + task2 + "sssss2");
 
-        Task task1 = (Task) session.getAttribute("task1");
-        Task task2 = (Task) session.getAttribute("task2");
-        System.out.println("TAAASK 1" + task1.getContent() + "TAAAAAAAAAASk 2 " + task2.getContent());
-        String typofswap = (String) session.getAttribute("method");
         DefaultServices.getInstance().modifyTask(task1, task2, typofswap);
         response.sendRedirect("tasks");
     }
-
-
 }
